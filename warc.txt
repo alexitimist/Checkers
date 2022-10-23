@@ -1,0 +1,70 @@
+Loop
+{Draw->Move_Input_1->Move_1->Draw->Move_Input_2->Move2}->...
+Loop Break:   -End of Game
+		+No possible more legal moves/No pieces on the board/Two Queens
+		+If surrendered/Accepted a Draw
+		+In a draw situation
+		+If
+		
+Computer Move Evaluation:
+	~Data;
+	 -Depth_max(Difficulty/Quickness of an evaluation)
+	 -Function telling if it's possible to move (If won/lost/drew)
+	 -Board Position->Legal moves->Possible end of game->Number of pieces and types->Points
+	 -Which players turn is
+	 -Depth_current (Cannot exceed Depth_max)
+	 -Evaluation score (In points indicating win/loss)
+	 -Pieces values, win/lose values
+
+Comp_Function(Board_pos,Is_comp_move,Depth_Max,Depth_Current)
+	return Points;
+
+	~Process:
+	 +Check if end of game if yes, return the result, if not run operations listed down below
+	 +Check depth
+	  -If Depth_current==Depth_max if is_comp_move=0 return -points else return points
+	  -If Depth_Current<Depth_max return move with the biggest sum after checking every move possibility (Function(New_board_pos_i, -is_comp_move, depth, depth_cur++))
+
+
+Draw Function:
+- w - White Checker    W - White Queen
+b - Black Checker -    B - Black Queen
+_ - Empty space
+
+	~Data:
+	 -Status of every cell - If a checker is there or not.
+
+Function(cells) void		cells can be a vector with a size of 32, there are 32 possible squares to move, can also be two vectors with a size of 16.
+												(There are two types of rows, both have 16 squares with
+	~Process:										possible moves it makes working on them easier)
+	 +Draw cell, then empty space 4 times.
+	 +Draw empty space, then cell 4 times.
+	 -Do previous steps 4 times in total.				//setw,setfill?
+	 +Draw a nice Frame, points
+
+Making a move: -Let it be a function too		//Its important to make it so it can be used by computer to move
+
+	~Data:
+	 -Function if_move_possible()?
+	 -Cells and their values
+	 -Check if_move_is_forced() (if you have to take)	  
+
+Work out how to take other checker with yours, then number of possible moves jumps to up to four moves
+If_move_possible() Depending on which row a cell is it can make up to two moves. (Depending if I want to make 2 vectors because once a checker can move onto 3,4 and 3,3 but in other scenario it can go onto 3,2 and 3,3)
+If_move_forced() You may have to take other checker taking the possibility to move freely
+
+	~Process:
+	 +if_move_is_forced()==true then next move has to include taking 
+	 +Input
+	 +if_move_possible()==true then change the value of specific cells depending on your move and if you take (2nd scenario you change more than 1 cell)
+
+Additional features that may not be needed but also may increase my grade
+ -Saving notation of games
+ -Make a computer analysis
+ -Save Leaderboards
+ -Make "accounts" with passwords and usernames
+ -Show current points mid-game
+ -Show pieces that you've taken next to the board
+ -Instructions next to drew image
+ -Optimalization - Saving good moves, prevent repetition etc	
+ -Usage of ncourses.h
